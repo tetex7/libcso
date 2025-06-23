@@ -108,13 +108,13 @@ CSO_PUB_API_OPEN void  cso_plat_free(void* ptr);
  */
 #define cso_super_cast(type, obj) ((type)obj)
 
-#define CSO_UNUSED(x) (void)(x)
-
 /**
  * @brief Simple helper macro for setting up inheritance in a class
  * @param type The class type to check against (use the *_t type).
  */
 #define cso_class_extends(type) type super
+
+#define CSO_UNUSED(x) ((void)(x))
 
 CSO_CPP_COMPAT_END
 
