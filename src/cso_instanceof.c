@@ -20,12 +20,14 @@
 //
 
 #include "libcso/cso_instanceof.h"
+#include "libcso/cso_object_c.h"
+#include "libcso/csodefs.h"
 #include <string.h>
 
 CSO_PUB_API_OPEN
-cso_bool __cso_instanceof_impl__(cso_object_c inst, const char* type_name)
+cso_bool __cso_instanceof_impl__(cso_object_c inst, cso_thin_rtti_class_id_t type_name)
 {
-    const char* inst_type = cso_object_getClassTypeStr(inst);
+    cso_thin_rtti_class_id_t inst_type = cso_typeid(inst);
     size_t inst_name_len = strlen(inst_type);
     if (inst_name_len != strlen(type_name)) return false;
     return !strncmp(inst_type, type_name, inst_name_len);

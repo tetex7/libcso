@@ -79,3 +79,10 @@ cso_bool cso_string_view_equals(cso_string_view_c self, const char* right)
     if (cso_string_view_getLength(self) != strlen(right)) return false;
     return !strncmp(cso_string_view_getRawString(self), right, cso_string_view_getLength(self));
 }
+
+
+CSO_PUB_API_OPEN
+cso_string_view_c cso_string_view_copy(cso_string_view_c self)
+{
+    return cso_string_view_new(cso_string_view_getRawString(self));
+}

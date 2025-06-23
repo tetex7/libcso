@@ -27,7 +27,7 @@ CSO_CPP_COMPAT_START
 
 typedef struct cso_object_s
 {
-    const char* class_type_str;
+    cso_thin_rtti_class_id_t class_type_str;
 } cso_object_t;
 
 /**
@@ -37,13 +37,15 @@ typedef struct cso_object_s
 typedef cso_object_t* cso_object_c;
 
 CSO_PUB_API_OPEN
-void cso_object_initializer(cso_object_c obj, const char* class_type_name);
+void cso_object_initializer(cso_object_c obj, cso_thin_rtti_class_id_t class_type_name);
 
 CSO_PUB_API_OPEN
-const char* cso_object_getClassTypeStr(cso_object_c self);
+cso_thin_rtti_class_id_t cso_object_getClassTypeStr(cso_object_c self);
 
 CSO_PUB_API_OPEN
 void cso_object_uninitializer(cso_object_c obj);
+
+#define cso_typeid(obj) cso_object_getClassTypeStr(cso_super_cast(cso_object_c, obj))
 
 CSO_CPP_COMPAT_END
 

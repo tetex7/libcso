@@ -20,6 +20,7 @@
 //
 #pragma once
 
+#include "libcso/csodefs.h"
 #ifndef CSO_STRING_VIEW_C_H
 #define CSO_STRING_VIEW_C_H
 #include <libcso/cso_object_c.h>
@@ -59,6 +60,9 @@ size_t cso_string_view_getLength(cso_string_view_c self);
 
 CSO_PUB_API_OPEN
 cso_bool cso_string_view_equals(cso_string_view_c self, const char* right);
+
+CSO_PUB_API_OPEN
+cso_string_view_c cso_string_view_copy(cso_string_view_c self);
 
 CSO_CPP_COMPAT_END
 

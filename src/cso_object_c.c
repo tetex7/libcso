@@ -22,7 +22,7 @@
 #include "libcso/cso_object_c.h"
 
 CSO_PUB_API_OPEN
-void cso_object_initializer(cso_object_c obj, const char* class_type_name)
+void cso_object_initializer(cso_object_c obj, cso_thin_rtti_class_id_t class_type_name)
 {
     if (!obj) return;
     if (!class_type_name)
@@ -33,7 +33,7 @@ void cso_object_initializer(cso_object_c obj, const char* class_type_name)
 }
 
 CSO_PUB_API_OPEN
-const char* cso_object_getClassTypeStr(cso_object_c self)
+cso_thin_rtti_class_id_t cso_object_getClassTypeStr(cso_object_c self)
 {
     if (!self) return NULL;
 

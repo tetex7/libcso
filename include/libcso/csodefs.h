@@ -86,6 +86,8 @@ typedef bool cso_flag;
 
 typedef uint8_t cso_byte;
 
+typedef const char* cso_thin_rtti_class_id_t;
+
 CSO_PUB_API_OPEN void* cso_plat_malloc(size_t size);
 CSO_PUB_API_OPEN void* cso_plat_realloc(void* ptr, size_t new_size);
 CSO_PUB_API_OPEN void* cso_plat_calloc(size_t num, size_t size);
@@ -113,5 +115,9 @@ CSO_PUB_API_OPEN void  cso_plat_free(void* ptr);
 #define cso_class_extends(type) type super
 
 CSO_CPP_COMPAT_END
+
+#if defined(__bool_true_false_are_defined) && !defined (__cplusplus)
+#   undef bool
+#endif
 
 #endif //CSODEFS_H

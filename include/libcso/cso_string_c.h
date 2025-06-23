@@ -21,6 +21,7 @@
 
 #ifndef CSO_STRING_C_H
 #define CSO_STRING_C_H
+#include "libcso/csodefs.h"
 #pragma once
 #include <libcso/cso_string_view_c.h>
 
@@ -38,6 +39,12 @@ cso_string_c cso_string_new(const char* string);
 
 CSO_PUB_API_OPEN
 void cso_string_destroy(cso_string_c self);
+
+CSO_PUB_API_OPEN
+cso_string_c cso_string_copy(cso_string_c self);
+
+CSO_PUB_API_OPEN
+cso_string_c cso_string_move(cso_string_c self);
 
 CSO_CPP_COMPAT_END
 

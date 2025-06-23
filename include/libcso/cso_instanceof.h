@@ -27,7 +27,7 @@
 CSO_CPP_COMPAT_START
 
 CSO_PUB_API_OPEN
-cso_bool __cso_instanceof_impl__(cso_object_c inst, const char* type_name);
+cso_bool __cso_instanceof_impl__(cso_object_c inst, cso_thin_rtti_class_id_t type_name);
 
 /**
  * @brief Checks if an object instance matches a specific class type.
