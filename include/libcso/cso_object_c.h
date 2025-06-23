@@ -47,6 +47,9 @@ void cso_object_uninitializer(cso_object_c obj);
 
 #define cso_typeid(obj) cso_object_getClassTypeStr(cso_super_cast(cso_object_c, obj))
 
+#define cso_obj_class_init(obj, type) cso_object_initializer((cso_object_c)(obj), cso_toTypeNameStr(type))
+
+
 CSO_CPP_COMPAT_END
 
 #endif //OBJECT_C_H
