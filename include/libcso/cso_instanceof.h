@@ -36,7 +36,7 @@ cso_bool __cso_instanceof_impl__(cso_object_c inst, cso_thin_rtti_class_id_t typ
  * @note This only compares the declared type of the object.
  *       It does NOT account for inheritance or parent types.
  */
-#define cso_instanceof(inst, type) __cso_instanceof_impl__(cso_super_cast(cso_object_c, inst), cso_toTypeNameStr(type))
+#define cso_instanceof(inst, type) (__cso_instanceof_impl__(cso_super_cast(cso_object_c, inst), cso_toTypeNameStr(type)))
 
 CSO_CPP_COMPAT_END
 

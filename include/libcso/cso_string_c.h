@@ -18,11 +18,9 @@
 //
 // Created by tete on 06/22/2025.
 //
-
+#pragma once
 #ifndef CSO_STRING_C_H
 #define CSO_STRING_C_H
-#include "libcso/csodefs.h"
-#pragma once
 #include <libcso/cso_string_view_c.h>
 
 CSO_CPP_COMPAT_START

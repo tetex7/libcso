@@ -84,12 +84,27 @@ file(GLOB C_SOURCES "${SRC_DIR}/*.c" "${SRC_DIR}/**/*.c")
 
 if (NOT WIN32 OR NOT CSO_CONFIG_STATIC_ONLY)
 # Shared library
-add_library(cso_shared SHARED ${C_SOURCES})
-set_target_properties(cso_shared PROPERTIES
-    OUTPUT_NAME "cso"
-    LIBRARY_OUTPUT_DIRECTORY ${BIN_DIR}
-)
-target_compile_definitions(cso_shared PRIVATE BUILDING_CSO)
+
+
+    add_library(cso_shared SHARED ${C_SOURCES})
+    set_target_properties(cso_shared PROPERTIES
+        OUTPUT_NAME "cso"
+        LIBRARY_OUTPUT_DIRECTORY ${BIN_DIR}
+    )
+    target_compile_definitions(cso_shared PRIVATE BUILDING_CSO)
+
+    if (CSO_CONFIG_USE_LIB_SAFENET)
+        find_package(PkgConfig REQUIRED)
+        pkg_check_modules(LIB_SN libsafetynet)
+
+        if (LIB_SN_FOUND)
+            message(STATUS "libsafetynet found")
+            target_link_libraries(cso_shared ${LIB_SN_LIBRARIES})
+        else()
+            message(WARNING "libsafetynet NOT found, (Ignoring -DCSO_CONFIG_USE_LIB_SAFENET)")
+        endif()
+    endif ()
+
 endif ()
 
 if (CSO_CONFIG_STATIC_ONLY OR WIN32)

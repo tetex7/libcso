@@ -16,53 +16,58 @@
  */
 
 //
-// Created by tete on 06/22/2025.
+// Created by tete on 06/23/2025.
 //
-#pragma once
 
-#ifndef CSO_STRING_VIEW_C_H
-#define CSO_STRING_VIEW_C_H
+#ifndef CSO_FILE_C_H
+#define CSO_FILE_C_H
+#include <libcso/csodefs.h>
 #include <libcso/cso_object_c.h>
+#include <libcso/cso_string_c.h>
+#include <stdio.h>
 
 CSO_CPP_COMPAT_START
 
-typedef struct cso_string_view_s
+typedef struct cso_file_s
 {
     cso_class_extends(cso_object_t);
+    FILE* rawFile;
+    cso_string_c path;
+    cso_string_c open_attributes;
+    cso_flag opened;
+} cso_file_t;
 
-    const char* data;
-    size_t length;
-} cso_string_view_t;
-
-/**
- * @brief A read only view of an ascii string including length metadata
- */
-typedef cso_string_view_t* cso_string_view_c;
+typedef cso_file_t* cso_file_c;
 
 CSO_PUB_API_OPEN
-void cso_string_view_initializer(cso_string_view_c obj, const char* char_string);
+void cso_file_initializer(cso_file_c obj, const char* path);
 
 CSO_PUB_API_OPEN
-void cso_string_view_uninitializer(cso_string_view_c obj);
+void cso_file_uninitializer(cso_file_c obj);
 
 CSO_PUB_API_OPEN
-cso_string_view_c cso_string_view_new(const char* string);
+cso_file_c cso_file_new(const char* path);
 
 CSO_PUB_API_OPEN
-void cso_string_view_destroy(cso_string_view_c self);
+void cso_file_destroy(cso_file_c self);
 
 CSO_PUB_API_OPEN
-const char* cso_string_view_getRawString(cso_string_view_c self);
+cso_bool cso_file_exists(cso_file_c self);
 
 CSO_PUB_API_OPEN
-size_t cso_string_view_getLength(cso_string_view_c self);
+cso_flag cso_file_open(cso_file_c self, const char* attributes);
 
 CSO_PUB_API_OPEN
-cso_bool cso_string_view_equals(cso_string_view_c self, const char* right);
+cso_flag cso_file_close(cso_file_c self);
 
 CSO_PUB_API_OPEN
-cso_string_view_c cso_string_view_copy(cso_string_view_c self);
+cso_bool cso_file_isOpen(cso_file_c self);
+
+CSO_PUB_API_OPEN
+cso_bool cso_file_isReadOnly(cso_file_c self);
+
+CSO_PUB_API_OPEN
+FILE* cso_file_getRawFilePtr(cso_file_c self);
 
 CSO_CPP_COMPAT_END
-
 #endif

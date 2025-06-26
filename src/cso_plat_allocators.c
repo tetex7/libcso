@@ -19,29 +19,51 @@
 // Created by tete on 06/22/2025.
 //
 
-#include <stdlib.h>
+
 #include "libcso/csodefs.h"
+
+#ifdef CSO_CONFIG_USE_LIB_SAFENET
+#   include <libsafetynet.h>
+#else
+#   include <stdlib.h>
+#endif
 
 CSO_PUB_API_OPEN
 void* cso_plat_malloc(size_t size)
 {
+#ifdef CSO_CONFIG_USE_LIB_SAFENET
+    return sn_malloc(size);
+#else
     return malloc(size);
+#endif
 }
 
 CSO_PUB_API_OPEN
 void* cso_plat_realloc(void* ptr, size_t new_size)
 {
+#ifdef CSO_CONFIG_USE_LIB_SAFENET
+    return sn_realloc(ptr, new_size);
+#else
     return realloc(ptr, new_size);
+#endif
 }
 
 CSO_PUB_API_OPEN
 void* cso_plat_calloc(size_t num, size_t size)
 {
+#ifdef CSO_CONFIG_USE_LIB_SAFENET
+    return sn_calloc(num, size);
+#else
     return calloc(num, size);
+#endif
 }
 
 CSO_PUB_API_OPEN
 void cso_plat_free(void* ptr)
 {
+#ifdef CSO_CONFIG_USE_LIB_SAFENET
+    sn_free(ptr);
+#else
     free(ptr);
+#endif
 }

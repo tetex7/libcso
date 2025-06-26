@@ -28,7 +28,7 @@ CSO_PUB_API_OPEN
 void cso_string_view_initializer(cso_string_view_c obj, const char* char_string)
 {
     if (!obj) return;
-    cso_object_initializer(cso_super_cast(cso_object_c, obj), cso_toTypeNameStr(cso_object_c));
+
 
     obj->length = strlen(char_string);
     obj->data = char_string;
@@ -38,7 +38,6 @@ CSO_PUB_API_OPEN
 void cso_string_view_uninitializer(cso_string_view_c obj)
 {
     if (!obj) return;
-    cso_object_uninitializer(cso_super_cast(cso_object_c, obj));
 }
 
 CSO_PUB_API_OPEN
@@ -48,6 +47,7 @@ cso_string_view_c cso_string_view_new(const char* string)
     cso_string_view_c self = cso_plat_malloc(sizeof(cso_string_view_t));
     if (!self) return NULL;
 
+    cso_object_initializer(cso_super_cast(cso_object_c, self), cso_toTypeNameStr(cso_object_c), sizeof(cso_string_view_t));
     cso_string_view_initializer(self, string);
     return self;
 }
@@ -56,8 +56,9 @@ CSO_PUB_API_OPEN
 void cso_string_view_destroy(cso_string_view_c self)
 {
     if (!self) return;
-
+    if (cso_get_obj_metadata(self).ghost) return;
     cso_string_view_uninitializer(self);
+    cso_object_uninitializer(cso_super_cast(cso_object_c, self));
     cso_plat_free(self);
 }
 
@@ -84,5 +85,6 @@ cso_bool cso_string_view_equals(cso_string_view_c self, const char* right)
 CSO_PUB_API_OPEN
 cso_string_view_c cso_string_view_copy(cso_string_view_c self)
 {
+    if (!cso_get_obj_metadata(self).copyable) return self;
     return cso_string_view_new(cso_string_view_getRawString(self));
 }

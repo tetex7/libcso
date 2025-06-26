@@ -15,15 +15,17 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-# Maintainer: tete <tetex7@outlook.com>
+# Maintainer: Tetex7 <tetex7@outlook.com>
 pkgname=libcso
 pkgver=1.0.0
 pkgrel=1
-pkgdesc='Passive garbage collector for C and C++'
-url='www.github.com/tetex7/libsafetynet'
+pkgdesc='An object oriented wrapper around libc written in C'
+url='www.github.com/tetex7/libcso'
 provides=()
 arch=('x86_64')
-#PACKAGER="${USER}"
+if [[ ! -z "${PK_PACKAGER}" ]]; then
+    PACKAGER="${PK_PACKAGER}"
+fi
 license=('GPL3')
 makedepends=('gcc' 'binutils' 'valgrind')
 depends=('glibc')

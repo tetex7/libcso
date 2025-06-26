@@ -27,6 +27,7 @@
 CSO_PUB_API_OPEN
 cso_bool __cso_instanceof_impl__(cso_object_c inst, cso_thin_rtti_class_id_t type_name)
 {
+    if (!inst || !type_name) return false;
     cso_thin_rtti_class_id_t inst_type = cso_typeid(inst);
     size_t inst_name_len = strlen(inst_type);
     if (inst_name_len != strlen(type_name)) return false;

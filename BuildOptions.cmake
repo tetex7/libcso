@@ -32,6 +32,10 @@ endif ()
 # Debug flag control
 option(CSO_CONFIG_DEBUG "Enable debug mode" OFF)
 
+option(CSO_CONFIG_USE_LIB_SAFENET "" OFF)
+
+option(CSO_CONFIG_THREAD_AWARE "Determine if the program should be built with thread awareness" ON)
+
 set(CSO_CONFIG_STR_VERSION "0.0.0" CACHE STRING "Set the version being compiled")
 set(CSO_CONFIG_VERSION_MAJOR 0 CACHE STRING "Set the major version being compiled")
 set(CSO_CONFIG_VERSION_MINOR 0 CACHE STRING "Set the minor version being compiled")

@@ -35,6 +35,8 @@ typedef struct cso_dny_vtable_s
     size_t length;
 } cso_dny_vtable_t;
 
+typedef cso_dny_vtable_t* cso_dny_vtable_o;
+
 
 CSO_CPP_COMPAT_END
 #endif
