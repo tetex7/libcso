@@ -68,6 +68,11 @@ void cso_file_destroy(cso_file_c self)
     cso_plat_free(self);
 }
 
+cso_bool cso_file_exists(cso_file_c self)
+{
+    return false;
+}
+
 cso_flag cso_file_open(cso_file_c self, const char* attributes)
 {
     if (!self || !attributes) return 1;
