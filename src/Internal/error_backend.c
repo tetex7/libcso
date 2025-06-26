@@ -73,3 +73,10 @@ void cso_clear_last_error()
     }
 }
 
+
+__attribute__((destructor))
+void exit_error_cleanup()
+{
+    if (!__cso_last_error)
+        cso_error_destroy(__cso_last_error);
+}

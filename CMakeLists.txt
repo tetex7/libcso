@@ -84,8 +84,6 @@ file(GLOB C_SOURCES "${SRC_DIR}/*.c" "${SRC_DIR}/**/*.c")
 
 if (NOT WIN32 OR NOT CSO_CONFIG_STATIC_ONLY)
 # Shared library
-
-
     add_library(cso_shared SHARED ${C_SOURCES})
     set_target_properties(cso_shared PROPERTIES
         OUTPUT_NAME "cso"
@@ -104,7 +102,6 @@ if (NOT WIN32 OR NOT CSO_CONFIG_STATIC_ONLY)
             message(WARNING "libsafetynet NOT found, (Ignoring -DCSO_CONFIG_USE_LIB_SAFENET)")
         endif()
     endif ()
-
 endif ()
 
 if (CSO_CONFIG_STATIC_ONLY OR WIN32)

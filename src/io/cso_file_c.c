@@ -67,3 +67,20 @@ void cso_file_destroy(cso_file_c self)
     cso_object_uninitializer(cso_super_cast(cso_object_c, self));
     cso_plat_free(self);
 }
+
+cso_flag cso_file_open(cso_file_c self, const char* attributes)
+{
+    if (!self || !attributes) return 1;
+    if (!cso_get_obj_metadata(self).ghost) return 1;
+    if (!cso_file_exists(self)) CSO_RUNTIME_FAIL("File does not exist", 404, 1);
+    if (cso_file_isOpen(self)) return 1;
+
+    if (FILE* file = fopen(cso_string_view_getRawString(self->path), attributes))
+    {
+        self->rawFile = file;
+        self->open_attributes = cso_string_new(attributes);
+        return 0;
+    }
+
+    CSO_RUNTIME_FAIL("fopen failed to open file", 480, 1);
+}
