@@ -71,18 +71,31 @@ CSO_CPP_COMPAT_START
 #   define CSO_VERY_OPTIMIZED __attribute__((optimize("O3")))
 #endif
 
-#if defined(CSO_NO_STD_BOOL) || !__has_include("stdbool.h")
-typedef enum
-{
-    false
-    true
-} cso_bool;
-typedef uint8_t cso_flag;
+#ifdef __has_include
+#   if __has_include("stdbool.h")
+#       define CSO_FANCY_HAS_BOOL_CHECK 1
+#   else
+#       define CSO_FANCY_HAS_BOOL_CHECK 0
+#   endif
+#else
+#   define CSO_FANCY_HAS_BOOL_CHECK 0
+#endif
+
+
+#if defined(CSO_NO_STD_BOOL) || !CSO_FANCY_HAS_BOOL_CHECK
+#   ifndef true
+#       define true 1
+#   endif
+#   ifndef false
+#       define false 0
+#   endif
+typedef uint8_t cso_bool;
 #else
 #   include <stdbool.h>
 typedef bool cso_bool;
-typedef bool cso_flag;
 #endif
+
+typedef cso_bool cso_flag;
 
 typedef uint8_t cso_byte;
 

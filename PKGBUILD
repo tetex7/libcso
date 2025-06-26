@@ -58,16 +58,16 @@ build () {
     fi
 
     if [[ "${PK_NO_TEST}" != "1"  ]]; then
-        #./test.sh
-        #if [ ${?} == 0 ]; then
-        ##    echo "Test passed no memory leaks"
-        #elif [ ${?} == 44 ]; then
-        #    echo "Test Compilation error"
-        #    exit ${?}
-        #else
-        #    echo "Memory error detected: see valgrind_output.log"
-        #    exit 1
-        #fi
+        ./test.sh
+        if [ ${?} == 0 ]; then
+            echo "Test passed no memory leaks"
+        elif [ ${?} == 44 ]; then
+            echo "Test Compilation error"
+            exit ${?}
+        else
+            echo "Memory error detected: see valgrind_output.log"
+            exit 1
+        fi
 
         if [[ -z "${PK_DEBUG}" || "${PK_DEBUG}" == "0" ]]; then
             echo "striping debug syms"

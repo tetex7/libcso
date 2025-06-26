@@ -19,8 +19,8 @@
 // Created by tete on 06/22/2025.
 //
 #pragma once
-#ifndef OBJECT_C_H
-#define OBJECT_C_H
+#ifndef CSO_OBJECT_C_H
+#define CSO_OBJECT_C_H
 #include <libcso/csodefs.h>
 
 CSO_CPP_COMPAT_START
@@ -35,9 +35,9 @@ typedef struct cso_thin_rtti_metadata_s
 
 typedef struct cso_object_s
 {
+    cso_thin_rtti_metadata_t class_meta_data;
     cso_thin_rtti_class_id_t class_type_str;
     size_t class_size;
-    cso_thin_rtti_metadata_t class_meta_data;
 } cso_object_t;
 
 /**

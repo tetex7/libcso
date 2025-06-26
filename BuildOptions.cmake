@@ -33,6 +33,7 @@ endif ()
 option(CSO_CONFIG_DEBUG "Enable debug mode" OFF)
 
 option(CSO_CONFIG_USE_LIB_SAFENET "" OFF)
+option(CSO_NO_STD_BOOL "" OFF)
 
 option(CSO_CONFIG_THREAD_AWARE "Determine if the program should be built with thread awareness" ON)
 

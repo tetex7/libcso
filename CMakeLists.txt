@@ -69,7 +69,7 @@ set(GCC_FLAGS "${GCC_FLAGS} -fvisibility=hidden")
 endif ()
 
 # Set C and C++ flags
-set(CMAKE_C_FLAGS "${GCC_FLAGS} -std=c99 -D__SN_WIP_CALLS__=")
+set(CMAKE_C_FLAGS "${GCC_FLAGS} -std=c99")
 #set(CMAKE_CXX_FLAGS "${GCC_FLAGS} -std=gnu++17")
 
 # Include directories
