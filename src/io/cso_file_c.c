@@ -21,6 +21,10 @@
 
 #include "libcso/io/cso_file_c.h"
 #include "libcso/cso_error.h"
+#include "libcso/cso_string_view_c.h"
+#include "libcso/csodefs.h"
+
+#include <stdio.h>
 
 CSO_PUB_API_OPEN
 void cso_file_initializer(cso_file_c obj, const char* path)
@@ -80,7 +84,9 @@ cso_flag cso_file_open(cso_file_c self, const char* attributes)
     if (!cso_file_exists(self)) CSO_RUNTIME_FAIL("File does not exist", 404, 1);
     if (cso_file_isOpen(self)) return 1;
 
-    if (FILE* file = fopen(cso_string_view_getRawString(self->path), attributes))
+    FILE* file = fopen(cso_string_view_getRawString(cso_super_cast(cso_string_view_c, self->path)), attributes);
+
+    if (!file)
     {
         self->rawFile = file;
         self->open_attributes = cso_string_new(attributes);
