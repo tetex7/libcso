@@ -55,17 +55,8 @@ cso_error_o cso_get_last_error();
 CSO_PUB_API_OPEN
 void cso_clear_last_error();
 
-static __inline cso_error_o cso_error_from_errno()
-{
-    const char* err_msg = strerror(errno);
-    if (!err_msg) err_msg = "Unknown system error";
-    return cso_error_new(
-        "SystemError",
-        err_msg,
-        errno,
-        NULL
-    );
-}
+CSO_PUB_API_OPEN
+cso_error_o cso_error_from_errno();
 
 static __inline void cso_throw_runtime(const char* msg, int code, void* data)
 {

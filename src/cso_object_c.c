@@ -23,6 +23,8 @@
 
 #include "libcso/cso_instanceof.h"
 
+#include <string.h>
+
 CSO_PUB_API_OPEN
 void cso_object_initializer(cso_object_c obj, cso_thin_rtti_class_id_t class_type_name, size_t class_type_size)
 {

@@ -20,6 +20,7 @@
 //
 
 #include "libcso/cso_error.h"
+#include <string.h>
 
 #ifdef CSO_CONFIG_THREAD_AWARE
 static __thread cso_error_o __cso_last_error = NULL; // NOLINT(*-reserved-identifier)
@@ -73,6 +74,18 @@ void cso_clear_last_error()
     }
 }
 
+CSO_PUB_API_OPEN
+cso_error_o cso_error_from_errno()
+{
+    const char* err_msg = strerror(errno);
+    if (!err_msg) err_msg = "Unknown system error";
+    return cso_error_new(
+        "SystemError",
+        err_msg,
+        errno,
+        NULL
+    );
+}
 
 __attribute__((destructor))
 void exit_error_cleanup()

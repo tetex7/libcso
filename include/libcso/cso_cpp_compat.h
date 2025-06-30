@@ -16,23 +16,25 @@
  */
 
 //
-// Created by tete on 06/22/2025.
+// Created by tete on 06/30/2025.
 //
 #pragma once
 
-#ifndef CSODEFS_H
-#define CSODEFS_H
+/**
+ * Simple compatibility macros for C++
+ */
 
-#include <libcso/cso_cpp_compat.h>
 
-CSO_CPP_COMPAT_START
+#ifndef CSO_CPP_COMPAT_H
+#define CSO_CPP_COMPAT_H
 
-#include <libcso/csoattrs.h>
-#include <libcso/csobool.h>
-#include <libcso/csotypes.h>
-#include <libcso/cso_plat_allocators.h>
-#include <libcso/cso_pseudo_keywords.h>
+#ifdef __cplusplus
+#define CSO_CPP_COMPAT_START extern "C" {
+#define CSO_CPP_COMPAT_END }
+#define CSO_CPP_COMPAT_MODE __cplusplus
+#else
+#define CSO_CPP_COMPAT_START
+#define CSO_CPP_COMPAT_END
+#endif
 
-CSO_CPP_COMPAT_END
-
-#endif //CSODEFS_H
+#endif //CSO_CPP_COMPAT_H

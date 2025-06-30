@@ -87,4 +87,4 @@ cso_object_c __cso_safe_ghost_copy_impl__(cso_object_c from, cso_thin_rtti_class
 
 CSO_CPP_COMPAT_END
 
-#endif //OBJECT_C_H
+#endif //CSO_OBJECT_C_H

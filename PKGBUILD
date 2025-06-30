@@ -59,9 +59,9 @@ build () {
 
     if [[ "${PK_NO_TEST}" != "1"  ]]; then
         ./test.sh
-        if [ ${?} == 0 ]; then
+        if [[ ${?} == 0 ]]; then
             echo "Test passed no memory leaks"
-        elif [ ${?} == 44 ]; then
+        elif [[ ${?} == 44 ]]; then
             echo "Test Compilation error"
             exit ${?}
         else

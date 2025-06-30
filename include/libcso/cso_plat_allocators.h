@@ -16,23 +16,23 @@
  */
 
 //
-// Created by tete on 06/22/2025.
+// Created by tete on 06/30/2025.
 //
 #pragma once
 
-#ifndef CSODEFS_H
-#define CSODEFS_H
-
+#ifndef CSO_PLAT_ALLOCATORS_H
+#define CSO_PLAT_ALLOCATORS_H
 #include <libcso/cso_cpp_compat.h>
+#include <libcso/csoattrs.h>
+#include <libcso/csotypes.h>
 
 CSO_CPP_COMPAT_START
 
-#include <libcso/csoattrs.h>
-#include <libcso/csobool.h>
-#include <libcso/csotypes.h>
-#include <libcso/cso_plat_allocators.h>
-#include <libcso/cso_pseudo_keywords.h>
+CSO_PUB_API_OPEN void* cso_plat_malloc(size_t size);
+CSO_PUB_API_OPEN void* cso_plat_realloc(void* ptr, size_t new_size);
+CSO_PUB_API_OPEN void* cso_plat_calloc(size_t num, size_t size);
+CSO_PUB_API_OPEN void  cso_plat_free(void* ptr);
 
 CSO_CPP_COMPAT_END
 
-#endif //CSODEFS_H
+#endif //CSO_PLAT_ALLOCATORS_H

@@ -25,6 +25,7 @@
 #include "libcso/csodefs.h"
 
 #include <stdio.h>
+#include <string.h>
 
 CSO_PUB_API_OPEN
 void cso_file_initializer(cso_file_c obj, const char* path)
@@ -63,6 +64,7 @@ cso_file_c cso_file_new(const char* path)
     return self;
 }
 
+CSO_PUB_API_OPEN
 void cso_file_destroy(cso_file_c self)
 {
     if (!self) return;
@@ -81,7 +83,7 @@ cso_flag cso_file_open(cso_file_c self, const char* attributes)
 {
     if (!self || !attributes) return 1;
     if (!cso_get_obj_metadata(self).ghost) return 1;
-    if (!cso_file_exists(self)) CSO_RUNTIME_FAIL("File does not exist", 404, 1);
+    if (cso_file_exists(self)) CSO_RUNTIME_FAIL("File does not exist", 404, 1);
     if (cso_file_isOpen(self)) return 1;
 
     FILE* file = fopen(cso_string_view_getRawString(cso_super_cast(cso_string_view_c, self->path)), attributes);
@@ -94,4 +96,21 @@ cso_flag cso_file_open(cso_file_c self, const char* attributes)
     }
 
     CSO_RUNTIME_FAIL("fopen failed to open file", 480, 1);
+}
+
+cso_flag cso_file_close(cso_file_c self)
+{
+    if (!self) return 1;
+    if (!self->opened) return 1;
+    fclose(self->rawFile);
+}
+
+cso_bool cso_file_isOpen(cso_file_c self)
+{
+    return self->opened;
+}
+
+cso_bool cso_file_isReadOnly(cso_file_c self)
+{
+    return cso_string_view_getRawString(self->open_attributes)[2] != 'w';
 }

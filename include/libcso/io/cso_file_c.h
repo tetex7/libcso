@@ -35,6 +35,7 @@ typedef struct cso_file_s
     cso_string_c path;
     cso_string_c open_attributes;
     cso_flag opened;
+    size_t file_size;
 } cso_file_t;
 
 typedef cso_file_t* cso_file_c;

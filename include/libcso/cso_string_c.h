@@ -22,6 +22,7 @@
 #ifndef CSO_STRING_C_H
 #define CSO_STRING_C_H
 #include <libcso/cso_string_view_c.h>
+#include <string.h>
 
 CSO_CPP_COMPAT_START
 
